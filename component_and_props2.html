@@ -1,0 +1,120 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Superhero App</title>
+    <style>
+      body {
+       
+        background-color: white;
+        margin: 0;
+        padding: 0;
+      }
+
+      .app-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: 20px auto;
+      }
+
+      .superhero-card {
+        border: 2px solid #3498db;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 15px;
+        width: 300px;
+        background-color: white;
+      }
+
+      .superhero-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .superhero-info {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+
+      function SuperheroCard({ superhero }) {
+        const { name, age, powers, address, isBachelor, imageUrl } = superhero;
+
+        return (
+          <div className="superhero-card">
+            <img className="superhero-image" src={imageUrl} alt={`${name}'s image`} />
+            <div className="superhero-info">
+              <p>Name: {name}</p>
+              <p>Age: {age}</p>
+              <p>Powers: {powers.join(", ")}</p>
+              <p>Address: {address.street}, {address.city}, {address.country}</p>
+              <p className={`is-bachelor ${isBachelor ? "is-bachelor-red" : "is-bachelor-green"}`}>
+                {isBachelor ? "Is a Bachelor" : "Not a Bachelor"}
+              </p>
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        const superheroes = [
+          {
+            name: "Batman",
+            powers: ["Rich", "Fly", "Genius"],
+            address: {
+              street: "Gotham St",
+              city: "Gotham",
+              country: "USA",
+            },
+            age: 21,
+            isBachelor: true,
+            imageUrl:
+              "https://rukminim2.flixcart.com/image/850/1000/poster/7/d/g/batman-portrait-bt455566-medium-original-imaekp86fhb3fhxf.jpeg",
+          },
+          {
+            name: "Superman",
+            powers: ["Laser Fry", "Fly", "Runs Fast"],
+            address: {
+              street: "Central St",
+              city: "New York",
+              country: "USA",
+            },
+            age: 41,
+            isBachelor: false,
+            imageUrl:
+              "https://c8.alamy.com/comp/2R7EMM0/portrait-of-a-drawing-of-superman-superhero-warner-dc-and-comics-concept-2R7EMM0.jpg",
+          },
+        ];
+
+        return (
+          <div className="app-container">
+            {superheroes.map((superhero, index) => (
+              <SuperheroCard key={index} superhero={superhero} />
+            ))}
+          </div>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
