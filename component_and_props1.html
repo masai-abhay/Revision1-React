@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Boilerplate Code</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Your React code will go here
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+
+      function User({ name, age, email }) {
+        return (
+          <div>
+            <p>
+              {name}and the age is{age} and the email is{email}
+            </p>
+          </div>
+        );
+      }
+
+      function ScoreCard({ score }) {
+        return <div>{score}</div>;
+      }
+
+     /* function ContainerWithblueBorder({children}){
+        return(
+            <div style={{border :"1px solid blue", padding :"25px", margin:"25px"}}>
+                {children}
+
+                </div>
+        )
+      }*/
+
+      function ContainerWithblueBorder({ children, borderColor }) {
+        const containerStyle = {
+          border: `2px solid ${borderColor}`,
+          padding: "15px",
+          margin: "15px",
+        };
+
+        return <div style={containerStyle}>{children}</div>;
+      }
+
+      function App() {
+        return (  <div>
+          <ContainerWithblueBorder borderColor="blue">
+            <User name="Abhay" age={26} email="abhay760chand@gmail.com" />
+            <ScoreCard score={50} />
+          </ContainerWithblueBorder>
+
+          
+
+          <ContainerWithblueBorder borderColor="green">
+              <ScoreCard score={75} />
+            </ContainerWithblueBorder>
+
+            <ContainerWithblueBorder borderColor="red">
+              <p>Some text content</p>
+            </ContainerWithblueBorder>
+
+            <ContainerWithblueBorder borderColor="purple">
+              <div>
+                <h2>Custom Component</h2>
+                <p>Any complex content can go here.</p>
+              </div>
+            </ContainerWithblueBorder>
+
+        </div>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
